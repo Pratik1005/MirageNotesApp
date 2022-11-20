@@ -23,6 +23,12 @@ export default function () {
         return schema.todos.create(data);
       });
 
+      this.put("/api/todos/:id", (schema, request) => {
+        const todoId = request.params.id;
+        const newText = JSON.parse(request.requestBody);
+        return schema.todos.find(todoId).update(newText);
+      });
+
       this.delete("/api/todos/:id", (schema, request) => {
         let todoId = request.params.id;
         return schema.todos.find(todoId).destroy();
